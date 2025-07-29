@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
 import { PWAUpdatePrompt } from "@/components/pwa-update-prompt"
 import { OfflineIndicator } from "@/components/offline-indicator"
 import { ProtectedRoute } from "@/components/protected-route"
 import { UserProfile } from "@/components/user-profile"
+import { Navigation } from "@/components/layouts/navigation"
 import { useAuth } from "@/lib/auth"
 import { usePermissions } from "@/hooks/use-permissions"
 
@@ -12,7 +14,7 @@ function Dashboard() {
   const { hasPermission } = usePermissions();
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-6 space-y-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
         <p className="text-muted-foreground">
@@ -23,34 +25,52 @@ function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 border rounded-lg bg-card">
-              <h3 className="font-semibold text-sm text-muted-foreground">TOTAL TASKS</h3>
-              <p className="text-2xl font-bold mt-1">24</p>
-              <p className="text-xs text-green-600 mt-1">+12% from last week</p>
-            </div>
-            <div className="p-4 border rounded-lg bg-card">
-              <h3 className="font-semibold text-sm text-muted-foreground">COMPLETED</h3>
-              <p className="text-2xl font-bold mt-1">18</p>
-              <p className="text-xs text-green-600 mt-1">+8% from last week</p>
-            </div>
-            <div className="p-4 border rounded-lg bg-card">
-              <h3 className="font-semibold text-sm text-muted-foreground">IN PROGRESS</h3>
-              <p className="text-2xl font-bold mt-1">6</p>
-              <p className="text-xs text-blue-600 mt-1">2 due today</p>
-            </div>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>TOTAL TASKS</CardDescription>
+                <CardTitle className="text-2xl">24</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-xs text-green-600">+12% from last week</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>COMPLETED</CardDescription>
+                <CardTitle className="text-2xl">18</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-xs text-green-600">+8% from last week</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>IN PROGRESS</CardDescription>
+                <CardTitle className="text-2xl">6</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-xs text-blue-600">2 due today</p>
+              </CardContent>
+            </Card>
           </div>
 
-          <div className="p-6 border rounded-lg bg-card">
-            <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <Button variant="outline" size="sm">New Task</Button>
-              <Button variant="outline" size="sm">View Reports</Button>
-              {hasPermission('admin_panel') && (
-                <Button variant="outline" size="sm">Admin Panel</Button>
-              )}
-              <Button variant="outline" size="sm">Settings</Button>
-            </div>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <Button variant="outline" size="sm">New Task</Button>
+                <Button variant="outline" size="sm">View Reports</Button>
+                {hasPermission('admin_panel') && (
+                  <Button variant="outline" size="sm">Admin Panel</Button>
+                )}
+                <Button variant="outline" size="sm">Settings</Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div>
@@ -79,42 +99,62 @@ function LandingPage() {
       </div>
       
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-6 border rounded-lg bg-card">
-          <h3 className="text-lg font-semibold mb-2">🔐 Enterprise Auth</h3>
-          <p className="text-muted-foreground mb-4">
-            Multi-provider authentication with role-based access control and multi-tenant support.
-          </p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>• Google & GitHub OAuth</li>
-            <li>• Role-based permissions</li>
-            <li>• Multi-tenant organizations</li>
-            <li>• Session management</li>
-          </ul>
-        </div>
-        <div className="p-6 border rounded-lg bg-card">
-          <h3 className="text-lg font-semibold mb-2">📱 PWA Ready</h3>
-          <p className="text-muted-foreground mb-4">
-            Installable, offline-capable, with service workers and auto-updates.
-          </p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>• Installable on mobile & desktop</li>
-            <li>• Offline functionality</li>
-            <li>• Auto-updates</li>
-            <li>• Push notifications</li>
-          </ul>
-        </div>
-        <div className="p-6 border rounded-lg bg-card">
-          <h3 className="text-lg font-semibold mb-2">⚡ Modern Stack</h3>
-          <p className="text-muted-foreground mb-4">
-            Built with React 18, TypeScript, TanStack, and Convex backend.
-          </p>
-          <ul className="text-sm text-muted-foreground space-y-1">
-            <li>• React 18 + TypeScript</li>
-            <li>• TanStack Router & Query</li>
-            <li>• Convex real-time backend</li>
-            <li>• ShadCN/UI components</li>
-          </ul>
-        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              🔐 Enterprise Auth
+            </CardTitle>
+            <CardDescription>
+              Multi-provider authentication with role-based access control and multi-tenant support.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• Google & GitHub OAuth</li>
+              <li>• Role-based permissions</li>
+              <li>• Multi-tenant organizations</li>
+              <li>• Session management</li>
+            </ul>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              📱 PWA Ready
+            </CardTitle>
+            <CardDescription>
+              Installable, offline-capable, with service workers and auto-updates.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• Installable on mobile & desktop</li>
+              <li>• Offline functionality</li>
+              <li>• Auto-updates</li>
+              <li>• Push notifications</li>
+            </ul>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              ⚡ Modern Stack
+            </CardTitle>
+            <CardDescription>
+              Built with React 18, TypeScript, TanStack, and Convex backend.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="text-sm text-muted-foreground space-y-1">
+              <li>• React 18 + TypeScript</li>
+              <li>• TanStack Router & Query</li>
+              <li>• Convex real-time backend</li>
+              <li>• ShadCN/UI components</li>
+            </ul>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
@@ -123,11 +163,18 @@ function LandingPage() {
 function App() {
   const { isAuthenticated } = useAuth();
 
+  const handleNavigate = (page: string) => {
+    // TODO: Implement actual navigation/routing
+    console.log('Navigate to:', page);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <OfflineIndicator />
       <PWAUpdatePrompt />
       <PWAInstallPrompt />
+      
+      <Navigation onNavigate={handleNavigate} />
       
       {isAuthenticated ? (
         <ProtectedRoute>
