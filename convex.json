@@ -1,0 +1,9 @@
+{
+  "functions": "./convex/",
+  "authInfo": [
+    {
+      "domain": "https://api.convex.dev",
+      "applicationID": "convex"
+    }
+  ]
+}

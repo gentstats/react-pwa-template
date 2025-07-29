@@ -34,7 +34,7 @@
     "autoprefixer": "^10.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "convex": "^1.0.0",
+    "convex": "^1.25.4",
     "date-fns": "^3.0.0",
     "lucide-react": "^0.400.0",
     "postcss": "^8.4.0",
