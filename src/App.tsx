@@ -1,8 +1,15 @@
 import { Button } from "@/components/ui/button"
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
+import { PWAUpdatePrompt } from "@/components/pwa-update-prompt"
+import { OfflineIndicator } from "@/components/offline-indicator"
 
 function App() {
   return (
     <div className="min-h-screen bg-background">
+      <OfflineIndicator />
+      <PWAUpdatePrompt />
+      <PWAInstallPrompt />
+      
       <div className="container mx-auto py-10">
         <div className="text-center">
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-6">
