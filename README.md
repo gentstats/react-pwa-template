@@ -1,0 +1,1 @@
+https://github.com/gentstats/react-pwa-template.git
